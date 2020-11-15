@@ -5,6 +5,10 @@ import os
 
 str = "testpw"
 stre = str.encode('utf-8')
+print(str)
+print(stre)
+
+w = hashlib.sha1(str)
 x = hashlib.sha1(stre)
 
 print(x.digest())
