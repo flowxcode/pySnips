@@ -1,3 +1,5 @@
+# this is a get sandbox for the requests module, simple test for fiddler wireshark and http proxy intercepter tools.
+
 import requests
 
 # url = 'http://www.google.com'
