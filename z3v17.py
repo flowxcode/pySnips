@@ -11,11 +11,13 @@ def main():
     s = Solver()
     x = Int('x')
     y = Int('y')
+
     s.add(x < 10)
     s.add(x > 0)
     s.add(y < 10)
     s.add(y > 0)
     s.add(x + y == 3)
+
     i = 0
     while s.check() == sat:
         print("Model %s:" % i)
