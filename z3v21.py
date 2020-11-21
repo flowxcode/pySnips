@@ -5,6 +5,35 @@ import sys
 import itertools
 from z3 import *
 
+# Create to bit-vectors of size 32
+x, y = BitVecs('x y', 32)
+
+print("solve 1:")
+solve(x + y == 2, x < 0, y > 0)
+
+# Bit-wise operators
+# & bit-wise and
+# | bit-wise or
+# ~ bit-wise not
+print("solve 2:")
+solve(x & y == ~y)
+
+print("solve 3:")
+solve(x < 0)
+
+# using unsigned version of < 
+print("solve 4:")
+solve(z3.ULT(x, 0))
+print("---------------")
+
+x, y = BitVecs('x y', 32)
+
+solve(x >> 2 == 3)
+solve(x << 2 == 3)
+solve(x << 2 == 24)
+
+# =========================================================== #
+
 person = {"luke": 0, "sam": 1, "paul": 2, "hank": 3, "zick": 4}
 
 '''
