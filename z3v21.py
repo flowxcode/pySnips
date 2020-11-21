@@ -67,6 +67,9 @@ print(type(table[0][0]))
 
 s = Solver()
 
+for v in crops.items():
+    print(v[0])
+
 # constrain the table values (fact 3 & 1)
 for i in range(5):
     s.add(table[i][0] >= 0, table[i][0] <= 4)  # person 0-based index
