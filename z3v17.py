@@ -27,6 +27,8 @@ def main():
         s.add(Or(x != model[x], y != model[y]))
         i = i + 1
 
+    stats = s.statistics()
+    print(stats)
 
 if __name__ == "__main__": 
 	main() 

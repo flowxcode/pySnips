@@ -7,19 +7,16 @@ from z3 import *
 
 
 
-
 def main():
 
     arr = [tuple([i]*5) for i in range(5)]
 
-
-
     table = [ BitVecs('go_%d0 c_%d1 c_%d2 c_%d3 c_%d4' % tuple([i]*5), 32) for i in range(5) ]
-    print(table)
-    
+    print(table)    
     print(table[0])
     print(table[0][0])
 
+    print(arr)
 
     for r in table:
         for c in r:
@@ -34,7 +31,6 @@ def main():
     print("Median of data-set is : % s " % (statistics.median(data1)))
 	
     person = list()
-
 
     # TODO modify for writing database as csv
     fieldnames = ["Age", "Male", "Salary (k)"]
@@ -59,12 +55,7 @@ def main():
 
     print(sorted([0,3,2]))
 
-
     s.add(Sum([If(And(male[i] == True, True), age[i], 0) for i in range(10)]) / (4) == 59)
-    s.add(Sum(sorted( [age[i] for i in range(10)] ))==1)
-
-    s.add(Sum(sorted([age[i] for i in range(10)]))/2 == 1)
-    s.add(medianx([age[i] for i in range(10)]) == 69)
 
     for i in range(10):
         if s.check() == sat:
@@ -80,6 +71,7 @@ def main():
         print(data)
     
     print(s.check())
+    print(s.statistics())
 
     return 0
 
