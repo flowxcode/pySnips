@@ -81,20 +81,64 @@ s.add(Distinct([table[i][0]  for i in range(5)]))
 # 2. Everybody grows exactly 4 different varieties.
 s.add([Distinct([table[i][j]  for j in range(5)])  for i in range(5)])
 
-
+for comb in itertools.combinations(range(5), 4):
+    print(comb)
 
 # 4. Only one variety is in 4 gardens. 
 constrain = []
-for v in crops.items():
-    for comb in itertools.combinations(range(5), 4):
+for v in crops.items(): # 12
+    for comb in itertools.combinations(range(5), 4): # results in 5 combination lines with 4 items
         p = And([Or([table[i][j] == v[1]  for j in range(1,5)])  for i in comb])
         q = And([And([table[i][j] != v[1]  for j in range(1,5)])  for i in range(5) if i not in comb])
         constrain.append(And(p, q))
 s.add(Or(constrain))
 
+print(constrain)
+# logic for one of the 12 crops. parent-OR contains 5 * 12crops = 60 And-blocks
+# on crop must be in 4 gardens (And) , but must not in the 5th
+# there are 5 combinations C(n,r) = C(5,4) = 5
+# one of these 5 must be True.
+# overall 5 * 12crops = 60 blocks containend in the parent-OR
+'''
+And(
+    And(
+        Or(c_01 == 72, c_02 == 72, c_03 == 72, c_04 == 72),
+        Or(c_11 == 72, c_12 == 72, c_13 == 72, c_14 == 72),
+        Or(c_21 == 72, c_22 == 72, c_23 == 72, c_24 == 72),
+        Or(c_31 == 72, c_32 == 72, c_33 == 72, c_34 == 72)
+    ),
+    And(
+        And(c_41 != 72, c_42 != 72, c_43 != 72, c_44 != 72)
+    )
+), 
 
+And(And(Or(c_01 == 72, c_02 == 72, c_03 == 72, c_04 == 72),
+    Or(c_11 == 72, c_12 == 72, c_13 == 72, c_14 == 72),
+    Or(c_21 == 72, c_22 == 72, c_23 == 72, c_24 == 72),
+    Or(c_41 == 72, c_42 == 72, c_43 == 72, c_44 == 72)),
+And(And(c_31 != 72, c_32 != 72, c_33 != 72, c_34 != 72))), 
+
+And(And(Or(c_01 == 72, c_02 == 72, c_03 == 72, c_04 == 72),
+    Or(c_11 == 72, c_12 == 72, c_13 == 72, c_14 == 72),
+    Or(c_31 == 72, c_32 == 72, c_33 == 72, c_34 == 72),
+    Or(c_41 == 72, c_42 == 72, c_43 == 72, c_44 == 72)),
+And(And(c_21 != 72, c_22 != 72, c_23 != 72, c_24 != 72))), 
+
+And(And(Or(c_01 == 72, c_02 == 72, c_03 == 72, c_04 == 72),
+    Or(c_21 == 72, c_22 == 72, c_23 == 72, c_24 == 72),
+    Or(c_31 == 72, c_32 == 72, c_33 == 72, c_34 == 72),
+    Or(c_41 == 72, c_42 == 72, c_43 == 72, c_44 == 72)),
+And(And(c_11 != 72, c_12 != 72, c_13 != 72, c_14 != 72))), 
+
+And(And(Or(c_11 == 72, c_12 == 72, c_13 == 72, c_14 == 72),
+    Or(c_21 == 72, c_22 == 72, c_23 == 72, c_24 == 72),
+    Or(c_31 == 72, c_32 == 72, c_33 == 72, c_34 == 72),
+    Or(c_41 == 72, c_42 == 72, c_43 == 72, c_44 == 72)),
+And(And(c_01 != 72, c_02 != 72, c_03 != 72, c_04 != 72))), 
+'''
 
 # 5. Only in one garden are all 3 kinds of crops. 
+# 0x70 of logical pipe Ors 111000 means all three first bits are set, means all varietes exist
 constrain = []
 for i in range(5):
     p = []
@@ -102,10 +146,11 @@ for i in range(5):
         eq = And( (table[j][1] | table[j][2] | table[j][3] | table[j][4]) & 0xf0 == 0x70 )
         p.append(eq)
         if j != i:
-            p[-1] = Not(p[-1])
+            p[-1] = Not(p[-1]) # make the last entry a Not
+
     constrain.append(And(p))
 s.add(Or(constrain))
-
+print(constrain)
 
 
 # 6. Only in one garden are all 4 varieties of one kind of crops.
