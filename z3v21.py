@@ -150,7 +150,7 @@ for i in range(5):
 
     constrain.append(And(p))
 s.add(Or(constrain))
-print(constrain)
+# print(constrain)
 
 
 # 6. Only in one garden are all 4 varieties of one kind of crops.
@@ -166,10 +166,11 @@ for i in range(5):
             p[-1] = Not(p[-1])
     constrain.append(And(p))
 s.add(Or(constrain))
-
+print(constrain)
 
 
 # 7. Pear is only in the two border gardens.
+print([Or([table[j][i] == crops['pear']  for i in range(1, 5)]) for j in [0, 4]])
 s.add(And([Or([table[j][i] == crops['pear']  for i in range(1, 5)]) for j in [0, 4]]))
 s.add([table[j][i] != crops['pear']  for j in range(1, 4)  for i in range(1, 5)])
 
@@ -179,7 +180,7 @@ s.add([table[j][i] != crops['pear']  for j in range(1, 4)  for i in range(1, 5)]
 s.add(table[2][0] == person['paul'])
 s.add([table[2][i] != crops['lily']  for i in range(1, 5)]) # can't be lily
 
-
+print([table[k][j] != crops['aster']  for k in range(5) if k != 0  for j in range(1, 5)])
 
 # 9. Aster grower doesn't grow vegetables.
 for i in range(5):
@@ -187,8 +188,29 @@ for i in range(5):
     q = [table[k][j] != crops['aster']  for k in range(5) if k != i  for j in range(1, 5)] # filter other than `i` can't be an aster
     q = q + [table[i][j] & 0x20 == 0x0  for j in range(1, 5)] # no vegetable
     s.add(Implies(p, And(q)))
-
-
+# q first
+'''
+00:c_11 != 24
+01:c_12 != 24
+02:c_13 != 24
+03:c_14 != 24
+04:c_21 != 24
+05:c_22 != 24
+06:c_23 != 24
+07:c_24 != 24
+08:c_31 != 24
+09:c_32 != 24
+10:c_33 != 24
+11:c_34 != 24
+12:c_41 != 24
+13:c_42 != 24
+14:c_43 != 24
+15:c_44 != 24
+16:c_01 & 32 == 0
+17:c_02 & 32 == 0
+18:c_03 & 32 == 0
+19:c_04 & 32 == 0
+'''
 
 # 10. Rose growers don't grow parsley.
 for i in range(5):
