@@ -11,7 +11,9 @@ from models.BColors import BColors
 
 # framework
 
-def mock():
+def mock(): # part of 6kpm1 optimization
+    n = 757
+    i = 5
     while i ** 2 <= n:
         print("i:" + str(i) + ", n:" + str(n))
         if n % i == 0 or n % (i + 2) == 0:
