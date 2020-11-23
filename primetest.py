@@ -23,7 +23,7 @@ def mock(): # part of 6kpm1 optimization
     print("the end")
 
 
-def isprime(x):
+def isprime(x): # dumb stub as framework
     for i in range(2, x-1):
         if x % i == 0:
             print(BColors.WARNING + "oooohh noooooooooo" + BColors.ENDC)
