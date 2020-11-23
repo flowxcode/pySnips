@@ -11,7 +11,7 @@ from models.BColors import BColors
 
 # framework
 
-def mock(): # part of 6kpm1 optimization
+def mock(): # part of 6kpm1 optimization, break modified
     n = 757
     i = 5
     while i ** 2 <= n:
@@ -23,7 +23,7 @@ def mock(): # part of 6kpm1 optimization
     print("the end")
 
 
-def isprime(x): # dumb stub as framework
+def isprime(x): # dumb stub as framework funktion, TODO
     for i in range(2, x-1):
         if x % i == 0:
             print(BColors.WARNING + "oooohh noooooooooo" + BColors.ENDC)
@@ -31,6 +31,21 @@ def isprime(x): # dumb stub as framework
         else:
             print(BColors.OKCYAN + "Christmas got a present for you. Its a prime number" + BColors.ENDC)
             return True
+
+
+def prime (n): # 6k algo
+    if n < 2:
+        return False
+    elif n < 4:
+        return True
+    elif n%2 == 0 or n%3 == 0:
+        return False
+    i = 5
+    while i * i <= n:
+        if n%i == 0 or n%(i+2) == 0:
+            return False
+        i += 6
+    return True
 
 
 def main():
