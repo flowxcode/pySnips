@@ -3,8 +3,12 @@
 '''Implementation of the Miller-Rabin primality test.  '''
 
 from random import randint
-from gcd import gcd
+# import gcd
 from math import log
+# from math import pow
+from math import gcd
+
+from mrabingfg import *
 
 def isMillerRabinPsuedoPrime(n,a):
   if n % 2 == 0:
@@ -12,8 +16,9 @@ def isMillerRabinPsuedoPrime(n,a):
   m = n-1; k = 0
   #find number of times 2 divides n-1
   while m % 2 == 0:
-    m = m/2
+    m = int(m/2)
     k = k + 1
+#   y = pow(a,m,n)
   y = pow(a,m,n)
   if y == 1:
     return True
@@ -22,6 +27,8 @@ def isMillerRabinPsuedoPrime(n,a):
       return 1
     y = y*y % n
   return False
+
+  
 
 def isLikelyPrime(n, pFail):
   '''Return True if n is prime with probability > 1 - pFail.
@@ -36,7 +43,8 @@ def isLikelyPrime(n, pFail):
   t = int(1 - log(pFail)/log(4)) # use conservative fraction witnessses > 3/4
   for i in range(t):
     a = randint(1,n-1)
-    if gcd(a,n) != 1 or not isMillerRabinPsuedoPrime(n,a):
+    #if gcd(a,n) != 1 or not isMillerRabinPsuedoPrime(n,a):
+    if gcd(a,n) != 1 or not miillerTest(n,a):
       return False    
   return True
 
