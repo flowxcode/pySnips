@@ -1,4 +1,6 @@
 # Python3 program Miller-Rabin primality test 
+# cred geeks for geeks
+
 import random  
   
 # Utility function to do 
