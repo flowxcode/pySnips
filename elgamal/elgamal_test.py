@@ -1,12 +1,10 @@
 from . import elgamal_flowx    # The code to test
 import unittest   # The test framework
 
-class Test_TestIncrementDecrement(unittest.TestCase):
+class Test_gcd(unittest.TestCase):
     def test_increment(self):
-        self.assertEqual(inc_dec.increment(3), 4)
+        self.assertEqual(elgamal_flowx.gcd(85, 995), 5)
 
-    def test_decrement(self):
-        self.assertEqual(inc_dec.decrement(3), 4)
 
 if __name__ == '__main__':
     unittest.main()
