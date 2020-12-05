@@ -4,7 +4,7 @@
 import random
 from math import pow
 
-a = random.randint(2, 10)  # TODO use secrets module
+# a = random.randint(2, 10)  # TODO use secrets module
 
 
 def gcd(a, b):
@@ -73,21 +73,23 @@ def decrypt(en_msg, p, key, q):
 # Driver code
 def main():
 
-    msg = "encryption"
-    print("Original Message :", msg)
+	msg = "encryption"
+	print("Original Message :", msg)
 
-    q = random.randint(pow(10, 20), pow(10, 50))
-    g = random.randint(2, q)
+	q = random.randint(pow(10, 20), pow(10, 50))
+	g = random.randint(2, q)
 
-    key = gen_key(q)  # Private key for receiver
-    h = power(g, key, q)
-    print("g used : ", g)
-    print("g^a used : ", h)
+	key = gen_key(q)  # Private key for receiver
+	h = power(g, key, q)
+	print("q used : ", q)
+	print("g used : ", g)
+	print("a used : ", key) # private key
+	print("g^a used : ", h)
 
-    en_msg, p = encrypt(msg, q, h, g)
-    dr_msg = decrypt(en_msg, p, key, q)
-    dmsg = "".join(dr_msg)
-    print("Decrypted Message :", dmsg)
+	en_msg, p = encrypt(msg, q, h, g)
+	dr_msg = decrypt(en_msg, p, key, q)
+	dmsg = "".join(dr_msg)
+	print("Decrypted Message :", dmsg)
 
 
 if __name__ == "__main__":
