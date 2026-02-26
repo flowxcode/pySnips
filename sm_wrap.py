@@ -1,5 +1,5 @@
 import struct
-from typing import bytes
+from typing import types
 
 def sm_wrap(cmd: bytes, enc_key: bytes, mac_key: bytes, ssc: int) -> bytes:
     # cmd = CLA INS P1 P2 Lc Data  (but we ignore real crypto here)
